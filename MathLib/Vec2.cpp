@@ -67,3 +67,24 @@ bool operator!=(const vec2 & lhs, const vec2 rhs)
 	}
 	return true;
 }
+
+vec2 & operator-=(vec2 & lhs, const vec2 & rhs)
+{
+	lhs.x -= rhs.x;
+	lhs.y -= rhs.y;
+	return lhs;
+}
+
+vec2 & operator*=(vec2 & lhs, const vec2 & rhs)
+{
+	lhs.x *= rhs.x;
+	lhs.y *= rhs.x;
+	return lhs;
+}
+
+vec2 & operator/=(vec2 & lhs, const vec2 & rhs)
+{
+	lhs.x /= rhs.x;
+	lhs.y /= rhs.x;
+	return lhs;
+}

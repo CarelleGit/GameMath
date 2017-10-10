@@ -5,7 +5,7 @@ using std::cout;
 int main()
 {
 	int val = min(1, 3);
-	//1
+	//OPEN 1
 	//Addtion
 	vec2 test;
 	test.x = 7;
@@ -57,5 +57,37 @@ int main()
 	nEq2.x = 4;
 	nEq2.y = 8;
 	bool nEres = nEq != nEq2;
+	//CLOSED 1
+	//+=
+	vec2 pEq;
+	pEq.x = 7;
+	pEq.y = 1;
+	vec2 pEq2;
+	pEq2.x = 3;
+	pEq2.y = 2;
+	vec2 pEres = pEq += pEq2;
+	//-=
+	vec2 sEq;
+	sEq.x = 2;
+	sEq.y = 5;
+	vec2 sEq2;
+	sEq2.x = 4;
+	sEq2.y = 8;
+	vec2 sEres = sEq -= sEq2;
+	//*=
+	vec2 mEq;
+	mEq.x = 2;
+	mEq.y = 2;
+	vec2 mEq2;
+	mEq2.x = 3;
+	vec2 mEres = mEq *= mEq2;
+	// /=
+	vec2 dEq;
+	dEq.x = 6;
+	dEq.y = 6;
+	vec2 dEq2;
+	dEq2.x = 2;
+	vec2 dEres = dEq /= dEq2;
+	//2
 	while (true){}
 }
