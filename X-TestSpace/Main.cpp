@@ -89,5 +89,10 @@ int main()
 	dEq2.x = 2;
 	vec2 dEres = dEq /= dEq2;
 	//2
+	//3-1
+
+	//3-2
+
+
 	while (true){}
 }

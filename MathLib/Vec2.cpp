@@ -88,3 +88,68 @@ vec2 & operator/=(vec2 & lhs, const vec2 & rhs)
 	lhs.y /= rhs.x;
 	return lhs;
 }
+
+float mag(const vec2 & v)
+{
+	float aSqr = v.x * v.x;
+	float bSqr = v.y * v.y;
+	return sqrt(aSqr + bSqr);
+}
+
+vec2 norm(const vec2 &V)
+{
+	vec2 temp = V;
+	float len = mag(V);
+	temp /= len;
+	return temp;
+}
+
+vec2 &Normalize(vec2 & v)
+{
+	v = norm(v);
+	return v;
+}
+
+vec2 dot(const vec2 & a, const vec2 & b)
+{
+
+	return a.x * b.x + a.y * b.y;
+}
+
+float dist(const vec2 & a, const vec2 & b)
+{
+	return mag(b - a);
+}
+
+vec2 prep(const vec2 & v)
+{
+	return vec2{v.y, -v.x};
+}
+
+vec2 lerp(const vec2 & s, const vec2 & e, float a)
+{
+	return s + a * (e - s);
+}
+
+vec2 min(const vec2 & a, const vec2 & b)
+{
+	return a < b ? a : b;
+}
+
+vec2 max(const vec2 & a, const vec2 & b)
+{
+	return a > b ? a : b;
+}
+
+
+
+float vec2::operator[](unsigned idx)
+{
+	
+	return v[idx];
+}
+
+float vec2::operator[](unsigned idx) const
+{
+	return v[idx];
+}
