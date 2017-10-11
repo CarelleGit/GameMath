@@ -10,7 +10,7 @@ vec2 operator+(const vec2 & lhs, const vec2 & rhs)
 	return res;
 }
 
-vec2 & operator+=(vec2 & lhs, const vec2 & rhs)
+vec2 &operator+=(vec2 & lhs, const vec2 & rhs)
 {
 	lhs.x += rhs.x;
 	lhs.y += rhs.y;
@@ -42,12 +42,27 @@ vec2 operator*(const vec2 & lhs, const vec2 & rhs)
 	return res;
 }
 
+vec2 operator*(const vec2 & lhs, const float rhs)
+{
+	vec2 res;
+	res.x = lhs.x * rhs;
+	res.y = lhs.y * rhs;
+	return res;
+}
+
+vec2 operator*(const float lhs, const vec2 & rhs)
+{
+	vec2 res;
+	res.x = lhs * rhs.x;
+	res.y = lhs * rhs.x;
+	return res;
+}
+
 vec2 operator/(const vec2 & lhs, const vec2 & rhs)
 {
 	vec2 res;
 	res.x = lhs.x / rhs.x;
 	res.y = lhs.y / rhs.x;
-	return res;
 	return res;
 }
 
@@ -75,17 +90,18 @@ vec2 & operator-=(vec2 & lhs, const vec2 & rhs)
 	return lhs;
 }
 
-vec2 & operator*=(vec2 & lhs, const vec2 & rhs)
+vec2 & operator*=(vec2 & lhs, const float & rhs)
 {
-	lhs.x *= rhs.x;
-	lhs.y *= rhs.x;
+	lhs.x *= rhs;
+	lhs.y *= rhs;
 	return lhs;
 }
 
-vec2 & operator/=(vec2 & lhs, const vec2 & rhs)
+vec2 &operator/=( vec2 & lhs, const float rhs)
 {
-	lhs.x /= rhs.x;
-	lhs.y /= rhs.x;
+	//lhs.x = lhs.x / rhs;
+	lhs.x = lhs.x / rhs;
+	lhs.y = lhs.y / rhs;
 	return lhs;
 }
 
@@ -110,7 +126,7 @@ vec2 &Normalize(vec2 & v)
 	return v;
 }
 
-vec2 dot(const vec2 & a, const vec2 & b)
+float dot(const vec2 & a, const vec2 & b)
 {
 
 	return a.x * b.x + a.y * b.y;
@@ -133,12 +149,18 @@ vec2 lerp(const vec2 & s, const vec2 & e, float a)
 
 vec2 min(const vec2 & a, const vec2 & b)
 {
-	return a < b ? a : b;
+	vec2 retval;
+	retval.x = fmin(a.x, b.x);
+	retval.y = fmin(a.y, b.y);
+	return retval;
 }
 
 vec2 max(const vec2 & a, const vec2 & b)
 {
-	return a > b ? a : b;
+	vec2 retval;
+	retval.x = fmax(a.x, b.x);
+	retval.y = fmax(a.y, b.y);
+	return retval;
 }
 
 

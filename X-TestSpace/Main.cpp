@@ -87,7 +87,7 @@ int main()
 	dEq.y = 6;
 	vec2 dEq2;
 	dEq2.x = 2;
-	vec2 dEres = dEq /= dEq2;
+	//vec2 dEres = dEq /= dEq2;
 	//2
 	//3-1
 
