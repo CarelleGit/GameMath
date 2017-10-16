@@ -165,7 +165,7 @@ vec2 max(const vec2 & a, const vec2 & b)
 
 
 
-float vec2::operator[](unsigned idx)
+float &vec2::operator[](unsigned idx)
 {
 	
 	return v[idx];

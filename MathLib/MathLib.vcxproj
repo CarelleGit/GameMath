@@ -112,10 +112,12 @@
   <ItemGroup>
     <ClInclude Include="Mathutils.h" />
     <ClInclude Include="Vec2.h" />
+    <ClInclude Include="Vec3.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Mathutils.cpp" />
     <ClCompile Include="Vec2.cpp" />
+    <ClCompile Include="Vec3.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

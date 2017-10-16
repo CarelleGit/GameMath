@@ -5,7 +5,7 @@ union vec2
 	float v[2];
 	struct { float x, y; };
 
-	float operator[](unsigned idx);
+	float &operator[](unsigned idx);
 	float operator[](unsigned idx) const;
 };
 
