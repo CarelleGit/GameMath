@@ -178,3 +178,10 @@ vec3 clamp(const vec3 & sMin, const vec3 & v, const vec3 & sMax)
 	temp = max(temp, sMin);
 	return temp;
 }
+
+vec3 cross(const vec3 & a, const vec3 & b)
+{
+	return vec3 {a.z*b.z - a.z*b.y,
+				 a.z*b.x - a.x*b.z,
+				 a.x *b.y - a.y*b.x};
+}

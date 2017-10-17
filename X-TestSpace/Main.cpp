@@ -1,5 +1,6 @@
 #include "Mathutils.h"
 #include "Vec2.h"
+#include "Mat3.h"
 #include "Vec3.h"
 #include <iostream>
 using std::cout;
@@ -90,7 +91,7 @@ int main()
 	//dEq2.x = 2;
 	//vec2 dEres = dEq /= dEq2;
 
-	vec3 add;
+	/*vec3 add;
 	add.x = 7;
 	add.y = 1;
 	add.z = 4;
@@ -148,6 +149,7 @@ int main()
 	m.z = 1;
 	mag(m);
 
-	norm(m);
+	norm(m);*/
+	
  	while (true) {}
 }
