@@ -174,7 +174,7 @@ vec3 max(const vec3 & a, const vec3 & b)
 vec3 clamp(const vec3 & sMin, const vec3 & v, const vec3 & sMax)
 {
 	vec3 temp = v;
-	temp = min(temp, a_max);
-	temp = max(temp, a_min);
-	return temp
+	temp = min(temp, sMax);
+	temp = max(temp, sMin);
+	return temp;
 }
