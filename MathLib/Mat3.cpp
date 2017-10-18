@@ -56,7 +56,7 @@ mat3 transpose(const mat3 & a)
 	mat3 retval;
 	for (int x = 0; x < 3; ++x)
 	{
-		for (int y = 0; y < 3; x++)
+		for (int y = 0; y < 3; ++y)
 		{
 			retval[x][y] = a[y][x];
 		}
@@ -93,10 +93,10 @@ mat3 scale(const vec2 & s)
 
 mat3 rotate(float deg)
 {
-	deg = deg * (3.14 / 180);
-	return{ (cos(deg), -sin(deg), 0,
-			 sin(deg), cos(deg),  0,
-			 0,        0,         1) };
+	float rad = deg * 0.0174533;
+	return{ cos(rad), sin(rad), 0,
+			 -sin(rad), cos(rad),  0,
+			 0,        0,         1 };
 						
 }
 

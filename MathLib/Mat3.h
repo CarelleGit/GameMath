@@ -8,7 +8,7 @@ union mat3
 	vec3 &operator[](size_t idx); 
 	const vec3 &operator[](size_t idx) const;
 	static mat3 identity();
-	static mat3 zero() { 0, 0, 0, 0, 0, 0, 0, 0, 0; };
+	static mat3 zero() { return mat3{0, 0, 0, 0, 0, 0, 0, 0, 0}; };
 };
 bool operator==(const mat3 &a, mat3 &b);
 mat3 operator+(const mat3 &a, const mat3 &b);

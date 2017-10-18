@@ -2,6 +2,7 @@
 #include "Vec2.h"
 #include "Mat3.h"
 #include "Vec3.h"
+#include <assert.h>
 #include <iostream>
 using std::cout;
 int main()
@@ -136,7 +137,7 @@ int main()
 	vec3 sc3Res = lSca *= 3;
 
 	vec3 d2Res = rDiv /= 2;
-	
+
 	vec3 sub;
 	sub.x = 7;
 	sub.y = 4;
@@ -150,6 +151,22 @@ int main()
 	mag(m);
 
 	norm(m);*/
-	
- 	while (true) {}
+	mat3 i = mat3::identity();
+	mat3 z = mat3::zero();
+	mat3 a = { 1,2,3,4,5,6,7,8,9 };
+	mat3 v{ 1,2,3,4,5,6,7,8,9 };
+	assert(i + z == i);
+	assert(z + i == i);
+	assert(i - z == i);
+	assert(!(z - i == i));
+	assert(i*v == a);
+	mat3 q = inverse(i);
+	assert(inverse(i) == i);
+	assert(a*i == a);
+	assert(i*a == a);
+	mat3 t = scale(vec2{ 1,2 });
+	t = t *rotate(90);
+	t = t*translation(vec2{ 3,0 });
+	assert((t[2].xy == vec2{ 0,6 }));
+	while (true) {}
 }

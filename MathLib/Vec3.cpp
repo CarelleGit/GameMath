@@ -1,6 +1,7 @@
 #include "Vec3.h"
 #include <cmath>
 #include <cfloat>
+#include"Mathutils.h"
 float & vec3::operator[](unsigned idx)
 {
 	return v[idx];
@@ -28,7 +29,7 @@ vec3 operator+=(vec3 & lhs, const vec3 & rhs)
 
 bool operator==(const vec3 & lhs, const vec3 & rhs)
 {
-	if (abs(lhs.x - rhs.x) < FLT_EPSILON && abs(lhs.y - rhs.y) < FLT_EPSILON &&abs(lhs.z - rhs.z) < FLT_EPSILON)
+	if (abs(lhs.x - rhs.x) < EPSILON && abs(lhs.y - rhs.y) < EPSILON &&abs(lhs.z - rhs.z) < EPSILON)
 	{
 		return true;
 	}
@@ -88,7 +89,7 @@ vec3 operator/(const vec3 & lhs, const float rhs)
 
 bool operator!=(const vec3 & lhs, const vec3 rhs)
 {
-	if (abs(lhs.x - rhs.x) < FLT_EPSILON && abs(lhs.y - rhs.y) < FLT_EPSILON &&abs(lhs.z - rhs.z) < FLT_EPSILON)
+	if (abs(lhs.x - rhs.x) < EPSILON && abs(lhs.y - rhs.y) < EPSILON &&abs(lhs.z - rhs.z) < EPSILON)
 	{
 		return false;
 	}
@@ -181,7 +182,7 @@ vec3 clamp(const vec3 & sMin, const vec3 & v, const vec3 & sMax)
 
 vec3 cross(const vec3 & a, const vec3 & b)
 {
-	return vec3 {a.z*b.z - a.z*b.y,
+	return vec3 {a.y*b.z - a.z*b.y,
 				 a.z*b.x - a.x*b.z,
 				 a.x *b.y - a.y*b.x};
 }
