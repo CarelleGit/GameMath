@@ -2,7 +2,7 @@
 #include "sfwdraw.h"
 Transform::Transform()
 {
-	if (movement == true)
+	/*if (movement == true)
 	{
 
 
@@ -14,7 +14,7 @@ Transform::Transform()
 		{
 			position.y -= 5;
 		}
-	}
+	}*/
 	position = vec2{ 0,0 };
 	dimentions = vec2{ 0,0 };
 	angle = 0;
