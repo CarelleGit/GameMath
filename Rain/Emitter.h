@@ -9,6 +9,7 @@ class Emitter : public FObject
 public:
 	Emitter();
 	int textureID;
+	bool enable = true;
 	// Collection of all particles
 	FObject rock[100];
 

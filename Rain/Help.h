@@ -1,20 +1,17 @@
 #pragma once
-#include "Vec2.h"
 #include "Mat3.h"
-
-class Transform
+class Tr
 {
 public:
-	bool movement = true;
 	vec2 position;
-	vec2 dimentions;
+	vec2 dimension;
 	float angle;
-	Transform();
-	Transform *e_parent;
+	Tr *e_parent;
+
+
+	Tr(vec2 a_pos = { 0,0 }, vec2 a_dim = { 1,1 }, float a_ang = 0);
+
 	mat3 getLocalTransform() const;
 	mat3 getGlobalTransform() const;
-	
-
 };
-void drawMatrix(const mat3 &t, float drawing_scale);
 void DrawTexture(unsigned sprite, const mat3 &t);

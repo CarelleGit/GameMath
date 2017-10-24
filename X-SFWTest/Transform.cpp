@@ -49,3 +49,5 @@ void drawMatrix(const mat3 & t, float drawing_scale)
 
 	sfw::drawCircle(pos.x, pos.y, drawing_scale / 4);
 }
+
+
