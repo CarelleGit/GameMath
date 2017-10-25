@@ -2,7 +2,7 @@
 #include "sfwdraw.h"
 void FObject::draw()
 {
-	sfw::drawTexture(textureID, oX, oY, 20, 20);
+	//sfw::drawTexture(textureID, oX, oY, 20, 20);
 	sfw::drawCircle(oX, oY, 10, 12, GREEN);
 
 }

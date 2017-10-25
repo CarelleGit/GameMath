@@ -18,7 +18,7 @@ int main()
 	sfw::initContext(800, 600, "Rain");
 	sfw::setBackgroundColor(BLACK);
 
-	int background = sfw::loadTextureMap("res/Background.png");
+	unsigned background = sfw::loadTextureMap("res/Background.png");
 	unsigned Ground = sfw::loadTextureMap("res/Ground.png");
 	Tr tran_background = { { 400,113 },{ 1600,700 }, 0 };
 
