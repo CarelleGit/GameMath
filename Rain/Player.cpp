@@ -40,7 +40,7 @@ void Player::Update(const mat3 &t)
 	{
 		jumpHeight -= 5;
 		position.y -= 5;
-		if (jumpHeight < 0)
+		if (jumpHeight <= 4)
 		{
 			isfalling = false;
 		}
@@ -63,8 +63,6 @@ void Player::Draw(const mat3 &t, float drawing_scale)
 	vec2 up_ep = pos + t[1].xy * drawing_scale;
 	float halfX = pos.x / 2.0f;
 	float halfY = pos.y / 2.0f;
-
-	sfw::drawCircle(pos.x, pos.y + 20, 20, 12, GREEN);
 	/*if (forward == true)
 	{
 		sfw::drawTexture(TextureID, pos.x, pos.y, 50, 100);

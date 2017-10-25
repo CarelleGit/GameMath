@@ -6,8 +6,8 @@ class Player //: public Collision
 public:
 	//rendering
 	int TextureID;
-	/*int LtextureID;
-	int RtextureID;*/
+	int LtextureID;
+	int RtextureID;
 	bool forward = true;
 	//Drawing player
 	float Speed;

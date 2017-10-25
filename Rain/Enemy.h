@@ -8,7 +8,7 @@ public:
 	//Texture
 	int TextureID;
 	//draw
-	bool movement = true;
+	bool enable = false;
 	vec2 position;
 	vec2 dimentions;
 	float angle;

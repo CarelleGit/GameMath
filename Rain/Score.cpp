@@ -21,6 +21,7 @@ void Score::draw()
 	Smin = std::to_string(min);
 	Ssec = std::to_string(sec);
 
+	sfw::drawString(font, "Esc to exit", 30, 476, 12, 12);
 	sfw::drawString(font, "R to restart", 30, 489, 12, 12);
 	sfw::drawString(font, "Clock ", 30, 510, 12, 12);
 	sfw::drawString(font, Smin.c_str(), 100, 510, 12, 12);
