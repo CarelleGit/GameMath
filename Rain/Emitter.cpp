@@ -11,7 +11,7 @@ Emitter::Emitter()
 	for (int i = 0; i < 100; i++)
 	{
 		rock[i].enabled = false;
-		rock[i].textureID = textureID;
+		rock[i].otextureID = emtextureID;
 	}
 }
 
@@ -38,8 +38,8 @@ void Emitter::update()
 				//reactivate it
 				FObject& baby = rock[i];
 
-				baby.oX = (rand() % 800 + 1);
-				baby.oY = (rand() % 600 + 700);
+				baby.oX = (rand() % 900 + 1);
+				baby.oY = (rand() % 700 + 800);
 				baby.gravity = (rand() % 100 + 80) * sfw::getDeltaTime();
 				                                                                                                   
 				baby.enabled = true;

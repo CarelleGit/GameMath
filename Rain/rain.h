@@ -3,7 +3,7 @@
 class FObject
 {
 public:
-	int textureID;
+	int otextureID;
 	float oX;
 	float oY;
 	int rad;

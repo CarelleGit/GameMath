@@ -9,9 +9,7 @@ mat3 Player::getLocalTransform() const
 
 void Player::Update(const mat3 &t)
 {
-	//RtextureID = sfw::loadTextureMap("RPlayer.png");
-	TextureID = sfw::loadTextureMap("res/Player.png");
-	//LtextureID = sfw::loadTextureMap("LPlayer.png");
+	
 
 	if (sfw::getKey('D'))
 	{
@@ -82,7 +80,7 @@ void Player::Draw(const mat3 &t, float drawing_scale)
 	}*/
 
 	//RtextureID = sfw::loadTextureMap("RPlayer.png");
-	sfw::drawTexture(TextureID, pos.x, pos.y, 50, 100);
+	sfw::drawTexture(pTextureID, pos.x, pos.y, 50, 100);
 	//LtextureID = sfw::loadTextureMap("LPlayer.png");
 
 	//left

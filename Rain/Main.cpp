@@ -20,8 +20,10 @@ int main()
 
 	unsigned background = sfw::loadTextureMap("res/Background.png");
 	unsigned Ground = sfw::loadTextureMap("res/Ground.png");
-	Tr tran_background = { { 400,113 },{ 1600,700 }, 0 };
+	unsigned cloud = sfw::loadTextureMap("res/Cloud.png");
 
+	Tr tran_background = { { 400,113 },{ 1600,700 }, 0 };
+	Tr tranCould = { {400,350},{1600,400},0 };
 	Collision col;
 
 	Player Cal;
@@ -66,6 +68,7 @@ int main()
 
 
 			DrawTexture(background, cam * tran_background.getGlobalTransform());
+			
 			//score
 				score.draw();
 			if (score.enable == true)
@@ -111,6 +114,8 @@ int main()
 
 			//player
 			sfw::drawTexture(Ground, 400, 5, 1600, 24);
+			//sfw::drawTexture(cloud, 400, 600, 1600, 400);
+			DrawTexture(cloud, cam * tranCould.getGlobalTransform());
 			if (Cal.enable == true)
 			{
 				Cal.Draw(Cal.getLocalTransform(), 100);

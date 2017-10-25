@@ -15,7 +15,7 @@ public:
 	std::string Ssec;
 	std::string hSec;
 	std::string hMin;
-	std::string PrintedTime = "";
+	//std::string PrintedTime = "";
 	void update();
 	void draw();
 

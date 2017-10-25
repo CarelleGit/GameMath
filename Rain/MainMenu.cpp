@@ -11,7 +11,7 @@ void menu::mDraw()
 
 	sfw::drawString(font, "[S]tart", 30, 476, 30, 30);
 	
-	sfw::drawTexture(mainPic, 400, 300, 800, 600);
+	//sfw::drawTexture(mainPic, 400, 300, 800, 600);
 }
 
 void start::update()

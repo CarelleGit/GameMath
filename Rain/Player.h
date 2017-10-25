@@ -1,13 +1,15 @@
 #pragma once
 #include "Vec2.h"
 #include "Mat3.h"
-class Player //: public Collision
+#include "Collision.h"
+#include "sfwdraw.h"
+class Player : public Collision
 {
 public:
 	//rendering
-	int TextureID;
-	/*int LtextureID;
-	int RtextureID;*/
+	int pTextureID = sfw::loadTextureMap("res/Player.png");
+	/*int LtextureID = sfw::loadTextureMap("LPlayer.png");
+	int RtextureID = sfw::loadTextureMap("RPlayer.png");*/
 	bool forward = true;
 	//Drawing player
 	float Speed;

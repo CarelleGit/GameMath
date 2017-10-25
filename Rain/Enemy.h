@@ -6,9 +6,9 @@ class enemy
 {
 public:
 	//Texture
-	int TextureID;
+	int eTextureID;
 	//draw
-	bool enable = false;
+	bool enable = true;
 	vec2 position;
 	vec2 dimentions;
 	float angle;

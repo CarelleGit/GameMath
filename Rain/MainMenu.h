@@ -10,7 +10,7 @@ private:
 public:
 	bool enable = true;
 	
-	std::string PrintedTime = "";
+	//std::string PrintedTime = "";
 	void mDraw();
 	void mUpdate();
 
