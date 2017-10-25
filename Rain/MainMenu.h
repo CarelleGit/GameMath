@@ -4,9 +4,9 @@
 class menu
 {
 private:
-	int mainPic;
+	int mainPic = sfw::loadTextureMap("res/mainMenu.png");
 	//mainPic = sfw::loadTextureMap("res/Player.png");
-	int font = sfw::loadTextureMap("res/fontmap.png", 16, 16);
+	
 public:
 	bool enable = true;
 	
@@ -25,7 +25,7 @@ public:
 	int quit();
 	void draw();
 	void update();
-
+	int font = sfw::loadTextureMap("res/fontmap.png", 16, 16);
 };
 
 

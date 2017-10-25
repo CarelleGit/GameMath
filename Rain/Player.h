@@ -8,8 +8,8 @@ class Player : public Collision
 public:
 	//rendering
 	int pTextureID = sfw::loadTextureMap("res/Player.png");
-	/*int LtextureID = sfw::loadTextureMap("LPlayer.png");
-	int RtextureID = sfw::loadTextureMap("RPlayer.png");*/
+	int LtextureID = sfw::loadTextureMap("res/LPlayer.png");
+	int RtextureID = sfw::loadTextureMap("res/RPlayer.png");
 	bool forward = true;
 	//Drawing player
 	float Speed;
@@ -24,8 +24,6 @@ public:
 	int jumpHeight = 0;
 	bool enable = true;
 	float gravityForce;
-	//bool isJump = false;
-	//bool isFalling = false;
 
 	mat3 getLocalTransform() const;
 	

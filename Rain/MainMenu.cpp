@@ -8,8 +8,8 @@ void menu::mUpdate()
 
 void menu::mDraw()
 {
+	sfw::drawTexture(mainPic, 400, 300, 800, 600);
 
-	sfw::drawString(font, "[S]tart", 30, 476, 30, 30);
 	
 	//sfw::drawTexture(mainPic, 400, 300, 800, 600);
 }
@@ -38,7 +38,7 @@ int start::quit()
 
 void start::draw()
 {
-	sfw::drawCircle(400, 300, 30, 12, BLACK);
+	sfw::drawString(font, "[S]tart", 560, 90, 30, 30,0,'\000',GREEN);
 }
 
 

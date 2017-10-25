@@ -1,17 +1,23 @@
 #pragma once
 #include "Vec2.h"
 #include "Mat3.h"
+#include "sfwdraw.h"
 
 class enemy
 {
 public:
 	//Texture
-	int eTextureID;
+	int eTextureID = sfw::loadTextureMap("res/Enemy.png");
+	int eTextureID2 = sfw::loadTextureMap("res/Enemy1.png");
+	int eTextureID3 = sfw::loadTextureMap("res/Enemy2.png");
+	int sprites[3];
 	//draw
 	bool enable = true;
 	vec2 position;
 	vec2 dimentions;
 	float angle;
+	float animTime =1;
+	int animSlot = 0;
 	enemy();
 	enemy *e_parent;
 	mat3 getLocalTransform() const;

@@ -16,7 +16,17 @@ void enemy::Update(const mat3 & t)
 
 void enemy::Draw(const mat3 & t, float drawing_scale)
 {
-	sfw::drawCircle(position.x, position.y, 20);
+	animTime -= sfw::getDeltaTime();
+	if (animTime < 0)
+	{
+		animTime = 1;
+		animSlot++;
+		if (animSlot > 2)
+		{
+			animSlot = 0;
+		}
+	}
+	sfw::drawTexture(sprites[animSlot], position.x, position.y, 40, 40);
 }
 enemy::enemy()
 {
@@ -24,6 +34,9 @@ enemy::enemy()
 	dimentions = vec2{ 0,0 };
 	angle = 0;
 	e_parent = nullptr;
+	sprites[0] = eTextureID;
+	sprites[1] = eTextureID2;
+	sprites[2] = eTextureID3;
 }
 mat3 enemy::getLocalTransform() const
 {

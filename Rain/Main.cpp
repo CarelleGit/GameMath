@@ -37,6 +37,9 @@ int main()
 	Emitter emitter;
 	emitter.spawnInterval = 0.2f;
 
+	Emitter emit;
+	emit.spawnInterval = 0.2f;
+
 	Score score;
 	score.sTime = 0;
 	score.enable = true;
@@ -54,9 +57,11 @@ int main()
 			main1.mDraw();
 			button1.draw();
 			button1.update();
+			emit.enable = true;
 		}
 		if (button1.enable == false)
 		{
+			emit.enable = false;
 			vec2 target = Cal.getLocalTransform()[2].xy;
 
 			target = max(vec2{ 0,0 }, min(target, vec2{ 600,400 }));
@@ -101,14 +106,7 @@ int main()
 						score.enable = true;
 						Cal.enable = true;
 					}
-					if (sfw::getKey(KEY_ESCAPE))
-					{
-						quit = true;
-						while (quit == true)
-						{
-							return -1;
-						}
-					}
+					
 				}
 			}
 
@@ -127,6 +125,14 @@ int main()
 			{
 				Acidic.Draw(Acidic.getGlobalTransform(), 100);
 				Acidic.Update(Acidic.getGlobalTransform());
+			}
+		}
+		if (sfw::getKey(KEY_ESCAPE))
+		{
+			quit = true;
+			while (quit == true)
+			{
+				return -1;
 			}
 		}
 	}

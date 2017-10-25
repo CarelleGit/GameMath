@@ -55,34 +55,25 @@ void Player::Update(const mat3 &t)
 
 void Player::Draw(const mat3 &t, float drawing_scale)
 {
-	sfw::drawCircle(0, 0, 20);
 	vec2 pos = t[2].xy;
 	vec2 right_ep = pos + t[0].xy * drawing_scale;
 	vec2 up_ep = pos + t[1].xy * drawing_scale;
 	float halfX = pos.x / 2.0f;
 	float halfY = pos.y / 2.0f;
-	/*if (forward == true)
-	{
-		sfw::drawTexture(TextureID, pos.x, pos.y, 50, 100);
-	}
 
-	if (sfw::getKey('A'))
+	if (!sfw::getKey('D') && !sfw::getKey('A'))
+	{
+		sfw::drawTexture(pTextureID, pos.x, pos.y, 50, 100);
+	}
+	else if (sfw::getKey('A'))
 	{
 		sfw::drawTexture(LtextureID, pos.x, pos.y, 50, 100);
 	}
-	if (sfw::getKey('D'));
+	else if (sfw::getKey('D'))
 	{
 		sfw::drawTexture(RtextureID, pos.x, pos.y, 50, 100);
 	}
-	if (!sfw::getKey('D') || !sfw::getKey('D'))
-	{
-		forward = true;
-	}*/
-
-	//RtextureID = sfw::loadTextureMap("RPlayer.png");
-	sfw::drawTexture(pTextureID, pos.x, pos.y, 50, 100);
-	//LtextureID = sfw::loadTextureMap("LPlayer.png");
-
+	
 	//left
 	
 }

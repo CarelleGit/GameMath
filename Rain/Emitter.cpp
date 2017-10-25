@@ -5,7 +5,7 @@
 
 Emitter::Emitter()
 {
-	//textureID = sfw::loadTextureMap("Rain.png");
+	emtextureID = sfw::loadTextureMap("res/Rain.png");
 
 	spawnAccumulator = 0.0f;
 	for (int i = 0; i < 100; i++)
