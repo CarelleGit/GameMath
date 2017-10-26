@@ -93,11 +93,10 @@ int main()
 			//collision
 			for (int i = 0; i < 100; i++)
 			{
-				if (emitter.rock[i].enabled)//(rock[i].enabled)
+				if (emitter.rock[i].enabled)
 				{
 					if (col.collide(Cal.position.x, Cal.position.y + 20, emitter.rock[i].oX, emitter.rock[i].oY, 20, 10) || col.collide(Cal.position.x, Cal.position.y + 20, Acidic.position.x, Acidic.position.y, 20, 30))
 					{
-						//Cal.enable = false;
 						Acidic.position.x = rand() % 700 + 600;
 						Cal.health = Cal.health - 1;
 					

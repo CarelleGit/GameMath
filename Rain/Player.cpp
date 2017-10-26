@@ -49,7 +49,7 @@ void Player::Update()
 	{
 		position.x = 800;
 	}
-	if (health <= 0)
+	if (health <= -1)
 	{
 		enable = false;
 	}
@@ -72,6 +72,10 @@ void Player::Draw()
 		sfw::drawTexture(RtextureID, pos.x, pos.y, 50, 100);
 	}
 	sfw::drawString(font, "Health:", 500, 500, 20, 20);
+	if (health == 0)
+	{
+		sfw::drawString(font, "0", 650, 500, 20, 20);
+	}
 	if (health == 1)
 	{
 		sfw::drawString(font, "1", 650, 500, 20, 20);
