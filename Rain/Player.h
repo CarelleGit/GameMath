@@ -10,6 +10,7 @@ public:
 	int pTextureID = sfw::loadTextureMap("res/Player.png");
 	int LtextureID = sfw::loadTextureMap("res/LPlayer.png");
 	int RtextureID = sfw::loadTextureMap("res/RPlayer.png");
+	int font = sfw::loadTextureMap("res/fontmap.png", 16, 16);
 	bool forward = true;
 	//Drawing player
 	float Speed;
@@ -21,12 +22,13 @@ public:
 	//misc
 	bool isjumping = false;
 	bool isfalling = false;
+	int health = 3;
 	int jumpHeight = 0;
 	bool enable = true;
 	float gravityForce;
 
 	mat3 getLocalTransform() const;
 	
-	void Update(const mat3 &t);
-	void Draw(const mat3 &t, float drawing_scale);
+	void Update();
+	void Draw();
 };

@@ -7,10 +7,8 @@ mat3 Player::getLocalTransform() const
 	
 }
 
-void Player::Update(const mat3 &t)
+void Player::Update()
 {
-	
-
 	if (sfw::getKey('D'))
 	{
 		position.x += 5;
@@ -51,15 +49,15 @@ void Player::Update(const mat3 &t)
 	{
 		position.x = 800;
 	}
+	if (health <= 0)
+	{
+		enable = false;
+	}
 }
 
-void Player::Draw(const mat3 &t, float drawing_scale)
+void Player::Draw()
 {
-	vec2 pos = t[2].xy;
-	vec2 right_ep = pos + t[0].xy * drawing_scale;
-	vec2 up_ep = pos + t[1].xy * drawing_scale;
-	float halfX = pos.x / 2.0f;
-	float halfY = pos.y / 2.0f;
+	vec2 pos = position;
 
 	if (!sfw::getKey('D') && !sfw::getKey('A'))
 	{
@@ -73,7 +71,19 @@ void Player::Draw(const mat3 &t, float drawing_scale)
 	{
 		sfw::drawTexture(RtextureID, pos.x, pos.y, 50, 100);
 	}
-	
+	sfw::drawString(font, "Health:", 500, 500, 20, 20);
+	if (health == 1)
+	{
+		sfw::drawString(font, "1", 650, 500, 20, 20);
+	}
+	if (health == 2)
+	{
+		sfw::drawString(font, "2", 650, 500, 20, 20);
+	}
+	if (health == 3)
+	{
+		sfw::drawString(font, "3", 650, 500, 20, 20);
+	}
 	//left
 	
 }

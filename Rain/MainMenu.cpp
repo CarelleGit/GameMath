@@ -42,4 +42,7 @@ void start::draw()
 	sfw::drawString(font, "[Esc] to exit", 10, 150, 30, 30, 0, '\000', GREEN);
 }
 
-
+void death::draw()
+{
+	sfw::drawTexture(GameOver, 400, 300, 800, 600);
+}

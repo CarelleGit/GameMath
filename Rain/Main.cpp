@@ -44,6 +44,7 @@ int main()
 	score.sTime = 0;
 	score.enable = true;
 
+	death screen;
 	menu main1;
 	start button1;
 
@@ -96,31 +97,41 @@ int main()
 				{
 					if (col.collide(Cal.position.x, Cal.position.y + 20, emitter.rock[i].oX, emitter.rock[i].oY, 20, 10) || col.collide(Cal.position.x, Cal.position.y + 20, Acidic.position.x, Acidic.position.y, 20, 30))
 					{
-						Cal.enable = false;
+						//Cal.enable = false;
+						Acidic.position.x = rand() % 700 + 600;
+						Cal.health = Cal.health - 1;
+					
+					}
+					if (Cal.enable == false)
+					{
 						score.enable = false;
-						Acidic.enable = false;
 						score.sTime = 0;
+						Acidic.enable = false;
+						screen.draw();
 					}
 					if (sfw::getKey('R') && Cal.enable == false)
 					{
 						Acidic.position.x = rand() % 800 + 700;
+						Cal.health = 3;
 						Acidic.enable = true;
+						
 						Cal.position.x = 400;
 						score.enable = true;
 						Cal.enable = true;
 					}
-					
+
 				}
 			}
 
 			//player
-			sfw::drawTexture(Ground, 400, 5, 1600, 24);
+			
 			//sfw::drawTexture(cloud, 400, 600, 1600, 400);
 			
 			if (Cal.enable == true)
 			{
-				Cal.Draw(Cal.getLocalTransform(), 100);
-				Cal.Update(Cal.getLocalTransform());
+				sfw::drawTexture(Ground, 400, 5, 1600, 24);
+				Cal.Draw();
+				Cal.Update();
 			}
 
 			//enemy

@@ -28,4 +28,12 @@ public:
 	int font = sfw::loadTextureMap("res/fontmap.png", 16, 16);
 };
 
+class death
+{
+public:
+	bool enable;
+	int GameOver = sfw::loadTextureMap("res/GameOver.jpeg");
+	void draw();
+};
+
 
