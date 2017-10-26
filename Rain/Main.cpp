@@ -32,10 +32,10 @@ int main()
 	Cal.gravityForce = 6.26f;
 
 	enemy Acidic;
-	Acidic.position = vec2{ 650,50 };
+	Acidic.position = vec2{ 650,35 };
 
 	Emitter emitter;
-	emitter.spawnInterval = 0.2f;
+	emitter.spawnInterval = 0.7f;
 
 	Emitter emit;
 	emit.spawnInterval = 0.2f;
@@ -75,11 +75,7 @@ int main()
 			DrawTexture(background, cam * tran_background.getGlobalTransform());
 			
 			//score
-				score.draw();
-			if (score.enable == true)
-			{
-				score.update();
-			}
+				
 
 			//emitter
 			if (emitter.enable == true)
@@ -87,21 +83,28 @@ int main()
 				emitter.draw();
 				emitter.update();
 			}
-
+			DrawTexture(cloud, cam * tranCould.getGlobalTransform());
+			score.draw();
+			if (score.enable == true)
+			{
+				score.update();
+			}
 			//collision
 			for (int i = 0; i < 100; i++)
 			{
 				if (emitter.rock[i].enabled)//(rock[i].enabled)
 				{
-					if (col.collide(Cal.position.x, Cal.position.y + 20, emitter.rock[i].oX, emitter.rock[i].oY, 20, 10) || col.collide(Cal.position.x, Cal.position.y + 20, Acidic.position.x, Acidic.position.y, 20, 20))
+					if (col.collide(Cal.position.x, Cal.position.y + 20, emitter.rock[i].oX, emitter.rock[i].oY, 20, 10) || col.collide(Cal.position.x, Cal.position.y + 20, Acidic.position.x, Acidic.position.y, 20, 30))
 					{
 						Cal.enable = false;
 						score.enable = false;
+						Acidic.enable = false;
 						score.sTime = 0;
-			
 					}
 					if (sfw::getKey('R') && Cal.enable == false)
 					{
+						Acidic.position.x = rand() % 800 + 700;
+						Acidic.enable = true;
 						Cal.position.x = 400;
 						score.enable = true;
 						Cal.enable = true;
@@ -113,7 +116,7 @@ int main()
 			//player
 			sfw::drawTexture(Ground, 400, 5, 1600, 24);
 			//sfw::drawTexture(cloud, 400, 600, 1600, 400);
-			DrawTexture(cloud, cam * tranCould.getGlobalTransform());
+			
 			if (Cal.enable == true)
 			{
 				Cal.Draw(Cal.getLocalTransform(), 100);
@@ -124,7 +127,7 @@ int main()
 			if (Acidic.enable == true)
 			{
 				Acidic.Draw(Acidic.getGlobalTransform(), 100);
-				Acidic.Update(Acidic.getGlobalTransform());
+				Acidic.Update(Acidic.getGlobalTransform(),Cal);
 			}
 		}
 		if (sfw::getKey(KEY_ESCAPE))

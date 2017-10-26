@@ -3,15 +3,26 @@
 #include <random>
 #include <ctime>
 
-void enemy::Update(const mat3 & t)
+void enemy::Update(const mat3 & t, Player &player)
 {
-
-	if (position.x <= -2)
+	if (player.position.x < position.x)
+	{
+		position.x -= 1.5f;
+	}
+	if (player.position.x > position.x)
+	{
+		position.x += 1.5f;
+	}
+	if(player.position.x == position.x)
+	{
+		position.x == position.x;
+	}
+	/*if (position.x <= -2)
 	{
 		float ran = rand() % 700 + 600;
 		position.x = ran;
 	}
-	position.x -= 3;
+	position.x -= 3;*/
 }
 
 void enemy::Draw(const mat3 & t, float drawing_scale)
@@ -21,7 +32,7 @@ void enemy::Draw(const mat3 & t, float drawing_scale)
 	{
 		animTime = 1;
 		animSlot++;
-		if (animSlot > 2)
+		if (animSlot > 3)
 		{
 			animSlot = 0;
 		}
@@ -37,6 +48,7 @@ enemy::enemy()
 	sprites[0] = eTextureID;
 	sprites[1] = eTextureID2;
 	sprites[2] = eTextureID3;
+	sprites[3] = eTextureID4;
 }
 mat3 enemy::getLocalTransform() const
 {

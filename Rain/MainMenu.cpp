@@ -38,7 +38,8 @@ int start::quit()
 
 void start::draw()
 {
-	sfw::drawString(font, "[S]tart", 560, 90, 30, 30,0,'\000',GREEN);
+	sfw::drawString(font, "[S]tart", 100, 90, 30, 30,0,'\000',GREEN);
+	sfw::drawString(font, "[Esc] to exit", 10, 150, 30, 30, 0, '\000', GREEN);
 }
 
 
