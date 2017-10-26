@@ -38,7 +38,7 @@ int main()
 	emitter.spawnInterval = 0.7f;
 
 	Emitter emit;
-	emit.spawnInterval = 0.2f;
+	emit.spawnInterval = 0.1f;
 
 	Score score;
 	score.sTime = 0;
@@ -52,12 +52,12 @@ int main()
 
 		if (button1.enable == true)
 		{
-			sfw::setCursorVisible(true);
-			sfw::getCursorVisible();
+			emit.draw();
+			emit.update();
 			main1.mDraw();
 			button1.draw();
 			button1.update();
-			emit.enable = true;
+			
 		}
 		if (button1.enable == false)
 		{
