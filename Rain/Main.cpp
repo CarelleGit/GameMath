@@ -44,6 +44,7 @@ int main()
 	score.sTime = 0;
 	score.enable = true;
 
+	controls con;
 	death screen;
 	menu main1;
 	start button1;
@@ -58,7 +59,11 @@ int main()
 			main1.mDraw();
 			button1.draw();
 			button1.update();
-			
+			con.update();
+			if (con.enable == true)
+			{
+				con.draw();
+			}
 		}
 		if (button1.enable == false)
 		{
@@ -88,7 +93,7 @@ int main()
 			score.draw();
 			if (score.enable == true)
 			{
-				score.update();
+				score.update(Cal);
 			}
 			//collision
 			for (int i = 0; i < 100; i++)
@@ -97,9 +102,9 @@ int main()
 				{
 					if (col.collide(Cal.position.x, Cal.position.y + 20, emitter.rock[i].oX, emitter.rock[i].oY, 20, 10) || col.collide(Cal.position.x, Cal.position.y + 20, Acidic.position.x, Acidic.position.y, 20, 30))
 					{
-						Acidic.position.x = rand() % 700 + 600;
+						Acidic.position.x = Cal.position.x + 100;
 						Cal.health = Cal.health - 1;
-					
+						
 					}
 					if (Cal.enable == false)
 					{

@@ -38,6 +38,7 @@ int start::quit()
 
 void start::draw()
 {
+	sfw::drawString(font, "[C]ontrols", 50, 210, 30, 30, 0, '\000', GREEN);
 	sfw::drawString(font, "[S]tart", 100, 90, 30, 30,0,'\000',GREEN);
 	sfw::drawString(font, "[Esc] to exit", 10, 150, 30, 30, 0, '\000', GREEN);
 }
@@ -45,4 +46,24 @@ void start::draw()
 void death::draw()
 {
 	sfw::drawTexture(GameOver, 400, 300, 800, 600);
+}
+
+
+
+void controls::update()
+{
+	if (sfw::getKey('C'))
+	{
+		enable = true;
+	}
+	if (sfw::getKey('B'))
+	{
+		enable = false;
+	}
+}
+
+void controls::draw()
+{
+	
+	sfw::drawTexture(Controls, 400, 300, 800, 600);
 }

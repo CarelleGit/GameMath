@@ -2,7 +2,7 @@
 #include "sfwdraw.h"
 #include <cmath>
 #include <iostream>
-void Score::update()
+void Score::update(Player player)
 {
 	if (enable == false)
 	{

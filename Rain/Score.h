@@ -1,8 +1,8 @@
 #pragma once
 #include "sfwdraw.h"
 #include <string>
-
-class Score
+#include "Player.h"
+class Score : public Player
 {
 public:
 	float sTime = 0.0f;
@@ -16,7 +16,7 @@ public:
 	std::string hSec;
 	std::string hMin;
 	//std::string PrintedTime = "";
-	void update();
+	void update(Player player);
 	void draw();
 
 

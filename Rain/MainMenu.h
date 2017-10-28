@@ -36,4 +36,13 @@ public:
 	void draw();
 };
 
+class controls
+{
+public:
+	int Controls = sfw::loadTextureMap("res/Controls.png");
+	bool enable = false;
+	void update();
+
+	void draw();
+};
 
