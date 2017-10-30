@@ -103,7 +103,7 @@ int main()
 					if (col.collide(Cal.position.x, Cal.position.y + 20, emitter.rock[i].oX, emitter.rock[i].oY, 20, 10) || col.collide(Cal.position.x, Cal.position.y + 20, Acidic.position.x, Acidic.position.y, 20, 30))
 					{
 						Acidic.position.x = Cal.position.x + 100;
-						Cal.health = Cal.health - 1;
+						Cal.health = Cal.health -= 1;
 						
 					}
 					if (Cal.enable == false)
