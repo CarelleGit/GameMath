@@ -4,18 +4,25 @@
 #include "Rigidbody.h"
 #include "DrawShapes.h"
 #include "Shapes.h"
+#include "Collision.h"
 #include <cmath>
+
 int main()
 {
-	sfw::initContext(800,600);
+	sfw::initContext(800, 600);
 	sfw::setBackgroundColor(BLACK);
 	Transform transform;
 	Rigidbody rigi;
-	transform.position = { 600,800 };
+	transform.position = { 0,0 };
 	transform.dimentions = { 100,150 };
+	circle circ2 = { { 400,300 }, 50 };
 
 	circle circ = { { 0,0 }, 1 };
 
+	AABB a = { {0,0},{1,1} };
+	AABB box{ {400,300}, {160,160} };
+	box.MinCorner = box.min();
+	box.MaxCorner = box.max();
 	//rigi.velocity = 50 * norm(vec2{ 800,600 });
 	/*Transform myTransform;
 	myTransform.position = vec2{ 400,300 };
@@ -35,23 +42,30 @@ int main()
 	Cal.baseSpeed = 3;*/
 	while (sfw::stepContext())
 	{
+
 		drawCircle(transform.getGlobalTransform() * circ);
-		drawMatrix(transform.getGlobalTransform(), 1);
-		float dt = sfw::getDeltaTime();
-		rigi.force = { 0,-10 };
-		if (sfw::getKey('W'))rigi.force += transform.getGlobalTransform()[1].xy * 100;
-		if (sfw::getKey('A')) rigi.torgue += 360;
-		if (sfw::getKey('D')) rigi.torgue += -360;
-		if (sfw::getKey('Q')) rigi.impulse += -transform.getGlobalTransform()[1].xy * 10;
-		if (sfw::getKey(' '))
+		drawCircle(circ2);
+		//drawAABB(transform.getGlobalTransform() * a, BLUE);
+		Collision res = intersect_circle(transform.getGlobalTransform() * circ, circ2);
+		//Collision res = intersect_AABB(transform.getGlobalTransform() * a, box);
+
+		//unsigned color = res.penetrationDepth < 0 ? WHITE : RED;
+
+		//drawAABB(box, color);
+
+		if (res.penetrationDepth >= 0)
 		{
-			rigi.force += -rigi.velocity * 20;
-			rigi.torgue += -rigi.aVeloc * 20;
+			transform.position += res.axis * res.handedness * res.penetrationDepth;
 		}
+
+		//drawMatrix(transform.getGlobalTransform(), 1);
+		float dt = sfw::getDeltaTime();
+		//rigi.force = { 0,-10 };
+		
 		rigi.intergrate(transform, dt);
 
 
-		drawMatrix(transform.getGlobalTransform(), 12);
+		drawMatrix(transform.getGlobalTransform(), 1);
 		//float t = sfw::getTime();
 		///*Cal.draw();
 		//Cal.update();*/

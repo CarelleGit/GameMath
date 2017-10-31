@@ -46,14 +46,19 @@ mat3 operator*(const mat3 & a, const mat3 & b)
 vec3 operator*(const mat3 & a, const vec3 & b)
 {
 	mat3 at = transpose(a);
-	return vec3{ dot(a[0], b),
-			     dot(a[1], b),
-				 dot(a[2], b)};
+	vec3 dummy{ dot(at[0], b),
+			     dot(at[1], b),
+				 dot(at[2], b)};
+	return dummy;
 }
 
 mat3 transpose(const mat3 & a)
 {
-	mat3 retval;
+	return mat3{ a[0][0], a[1][0], a[2][0],
+		a[0][1], a[1][1], a[2][1],
+		a[0][2], a[1][2], a[2][2] };
+
+	/*mat3 retval;
 	for (int x = 0; x < 3; ++x)
 	{
 		for (int y = 0; y < 3; ++y)
@@ -61,7 +66,7 @@ mat3 transpose(const mat3 & a)
 			retval[x][y] = a[y][x];
 		}
 	}
-	return retval;
+	return retval;*/
 }
 
 float determinant(const mat3 & a)
