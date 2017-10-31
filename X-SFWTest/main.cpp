@@ -2,6 +2,8 @@
 #include "Player.h"
 #include "Transform.h"
 #include "Rigidbody.h"
+#include "DrawShapes.h"
+#include "Shapes.h"
 #include <cmath>
 int main()
 {
@@ -10,6 +12,10 @@ int main()
 	Transform transform;
 	Rigidbody rigi;
 	transform.position = { 600,800 };
+	transform.dimentions = { 100,150 };
+
+	circle circ = { { 0,0 }, 1 };
+
 	//rigi.velocity = 50 * norm(vec2{ 800,600 });
 	/*Transform myTransform;
 	myTransform.position = vec2{ 400,300 };
@@ -29,6 +35,8 @@ int main()
 	Cal.baseSpeed = 3;*/
 	while (sfw::stepContext())
 	{
+		drawCircle(transform.getGlobalTransform() * circ);
+		drawMatrix(transform.getGlobalTransform(), 1);
 		float dt = sfw::getDeltaTime();
 		rigi.force = { 0,-10 };
 		if (sfw::getKey('W'))rigi.force += transform.getGlobalTransform()[1].xy * 100;
