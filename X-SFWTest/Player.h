@@ -1,13 +1,25 @@
 #pragma once
 #include "Vec2.h"
-
+#include "Rigidbody.h"
+#include "Transform.h"
+#include "Collider.h"
+#include "Controller.h"
+#include "Sprites.h"
 
 class Player
 {
 public:
-	vec2 pos;
-	float baseSpeed;
-	float speed;
-	void update();
-	void draw();
+	Transform trans;
+	Rigidbody rgdb;
+	Collider collider;
+	Controller controller;
+	Sprite sprite;
+
+};
+class Wall
+{
+public:
+	Transform trans;
+	Collider coll;
+	Sprite sprite;
 };
