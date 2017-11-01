@@ -172,6 +172,17 @@ vec2 max(const vec2 & a, const vec2 & b)
 	return retval;
 }
 
+vec2 projection(const vec2 & v, const vec2 & axis)
+{
+	return dot(v,axis) * axis;
+}
+
+vec2 reflect(const vec2 & v, const vec2 & axis)
+{
+	vec2 displacment = projection(v, axis) - v;
+	return displacment + projection(v, axis);
+}
+
 
 
 float &vec2::operator[](unsigned idx)

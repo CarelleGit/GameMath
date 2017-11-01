@@ -1,7 +1,4 @@
 #include "Collision.h"
-#include "Shapes.h"
-#include "Mathutils.h"
-#include "Vec2.h"
 #include <cmath>
 Collision intersect_1D(float aMin, float aMax, float bMin, float bMax)
 {
@@ -26,12 +23,6 @@ Collision intersect_AABB(const AABB & a, const AABB & b)
 	return xres.penetrationDepth < yres.penetrationDepth? xres : yres;
 }
 
-Collision intersect_AABB_circle(const AABB & a, const circle & c)
-{
-	vec2 p;
-	return Collision();
-}
-
 Collision intersect_circle(const circle & a, const circle & b)
 {
 	Collision ret;
@@ -48,4 +39,30 @@ Collision intersect_circle(const circle & a, const circle & b)
 	ret.penetrationDepth = intersect_1D(Amin, Amax, Bmin, Bmax).penetrationDepth;
 
 	return ret;
+}
+
+void static_resolution(vec2 & pos, vec2 & vel, const Collision & hit, float elasticity)
+{
+	pos += hit.axis * hit.handedness * hit.penetrationDepth;
+
+	vel = reflect(vel, hit.axis*hit.handedness) * elasticity;
+}
+
+void dynamic_resolution(vec2 & aPos, vec2 & aVel, float aMass, vec2 & bPos, vec2 bVel,float bMass, const Collision & hit, float elasticity)
+{
+	vec2 rVel = aVel - bVel;
+
+	vec2 normal = hit.axis * hit.handedness;
+
+	-(1 + elasticity) * dot(rVel, normal) / dot (normal, normal*(1 / aMass + 1 / bMass));
+
+	float j;
+
+	
+	aVel += (j / aMass) * normal;
+	bVel -= (j / bMass) * normal;
+
+	aPos += normal * hit.penetrationDepth * aMass / (aMass + bMass);
+	bPos -= normal * hit.penetrationDepth * bMass / (aMass + bMass);
+
 }

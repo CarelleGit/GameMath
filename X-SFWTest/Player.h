@@ -23,3 +23,5 @@ public:
 	Collider coll;
 	Sprite sprite;
 };
+
+bool doCollision(Player &player, const Wall &wall);
