@@ -54,9 +54,9 @@ void dynamic_resolution(vec2 & aPos, vec2 & aVel, float aMass, vec2 & bPos, vec2
 
 	vec2 normal = hit.axis * hit.handedness;
 
-	-(1 + elasticity) * dot(rVel, normal) / dot (normal, normal*(1 / aMass + 1 / bMass));
+	
 
-	float j;
+	float j = -(1 + elasticity) * dot(rVel, normal) / dot(normal, normal*(1 / aMass + 1 / bMass));
 
 	
 	aVel += (j / aMass) * normal;

@@ -25,6 +25,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Rain", "Rain\Rain.vcxproj",
 		{44E4D33D-03F6-407A-BCF5-30C9FA40A746} = {44E4D33D-03F6-407A-BCF5-30C9FA40A746}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "oBloodstained", "oBloodstained\oBloodstained.vcxproj", "{9D611F99-E570-484E-909B-9EE8125F6E40}"
+	ProjectSection(ProjectDependencies) = postProject
+		{44E4D33D-03F6-407A-BCF5-30C9FA40A746} = {44E4D33D-03F6-407A-BCF5-30C9FA40A746}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -73,6 +78,14 @@ Global
 		{A78B3822-4984-45EB-8C06-4D8E60543B4E}.Release|x64.Build.0 = Release|x64
 		{A78B3822-4984-45EB-8C06-4D8E60543B4E}.Release|x86.ActiveCfg = Release|Win32
 		{A78B3822-4984-45EB-8C06-4D8E60543B4E}.Release|x86.Build.0 = Release|Win32
+		{9D611F99-E570-484E-909B-9EE8125F6E40}.Debug|x64.ActiveCfg = Debug|x64
+		{9D611F99-E570-484E-909B-9EE8125F6E40}.Debug|x64.Build.0 = Debug|x64
+		{9D611F99-E570-484E-909B-9EE8125F6E40}.Debug|x86.ActiveCfg = Debug|Win32
+		{9D611F99-E570-484E-909B-9EE8125F6E40}.Debug|x86.Build.0 = Debug|Win32
+		{9D611F99-E570-484E-909B-9EE8125F6E40}.Release|x64.ActiveCfg = Release|x64
+		{9D611F99-E570-484E-909B-9EE8125F6E40}.Release|x64.Build.0 = Release|x64
+		{9D611F99-E570-484E-909B-9EE8125F6E40}.Release|x86.ActiveCfg = Release|Win32
+		{9D611F99-E570-484E-909B-9EE8125F6E40}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
