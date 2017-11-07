@@ -183,6 +183,14 @@ vec2 reflect(const vec2 & v, const vec2 & axis)
 	return displacment + projection(v, axis);
 }
 
+vec2 clamp(const vec2 & smin, const vec2 & v, const vec2 & smax)
+{
+	vec2 temp = v;
+	temp = min(temp, smax);
+	temp = max(temp, smin);
+	return temp;
+}
+
 
 
 float &vec2::operator[](unsigned idx)

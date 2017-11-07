@@ -36,4 +36,5 @@ vec2 max(const vec2 &a, const vec2 &b);
 vec2 projection(const vec2 &v, const vec2 &axis);
 vec2 reflect(const vec2 &v, const vec2 &axis);
 
+vec2 clamp(const vec2 &smin, const vec2 &v, const vec2 &smax);
 

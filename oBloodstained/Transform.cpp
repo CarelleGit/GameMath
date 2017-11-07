@@ -1,5 +1,4 @@
 #include "Transform.h"
-#include "sfwdraw.h"
 Transform::Transform()
 {
 	position = vec2{ 0,0 };
@@ -33,10 +32,6 @@ mat3 Transform::GetGlobalTransform() const
 	{
 		return GetLocalTransform();
 	}
-}
-mat3 GetGlobalTransform()
-{
-
 }
 
 void drawTexture(unsigned sprite, const mat3 & t)
