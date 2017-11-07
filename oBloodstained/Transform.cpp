@@ -2,7 +2,7 @@
 Transform::Transform()
 {
 	position = vec2{ 0,0 };
-	dimentions = vec2{ 0,0 };
+	dimentions = vec2{ 1,1 };
 	angle = 0;
 	e_parent = nullptr;
 }

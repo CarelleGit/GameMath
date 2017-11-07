@@ -14,6 +14,7 @@ public:
 	{
 
 	}
+	void drawBox();
 };
 Collision Collides(const Transform &aT, const Collider &aC, const Transform &bT, const Collider &bC);
 

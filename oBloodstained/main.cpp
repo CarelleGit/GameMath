@@ -9,12 +9,14 @@ int main()
 	Player Kel;
 	Kel.sprite = sfw::loadTextureMap("res/Adorable-Cat-PNG.png");
 	Kel.transform.dimentions = vec2{ 100,100 };
+	Kel.collider.box.extents = vec2{ 0.5,.5 };
 	Kel.transform.position = vec2{ 400,300 };
 	Kel.rgdb.drag = 5.5f;
 
 	Karma kar;
 	kar.sprite = sfw::loadTextureMap("res/Adorable-Cat-PNG.png");
 	kar.transform.dimentions = vec2{ 50,50 };
+	kar.collider.box.extents = { vec2 {.1f,.1f} };
 	kar.transform.position = vec2{ 0,300 };
 	kar.rgdb.drag = 5.5f;
 
@@ -28,7 +30,7 @@ int main()
 			Kel.rgdb.intergrate(Kel.transform, dt);
 			Kel.sprite.draw(Kel.transform);
 		}
-
+		kar.collider.drawBox();
 		kar.move(Kel, kar.transform);
 		kar.rgdb.intergrate(kar.transform, dt);
 		kar.sprite.draw(kar.transform);

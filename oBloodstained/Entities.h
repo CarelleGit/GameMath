@@ -9,6 +9,10 @@
 class Player : public Controller 
 {
 public:
+	int weaponType;
+	int level = 0;
+	int damage;
+
 	Transform transform;
 	Rigidbody rgdb;
 	Controller control;
@@ -16,17 +20,22 @@ public:
 	Sprite sprite;
 	int health = 20;
 	void speedClamp();
+	void collisionResolution();
 };
 class Karma
 {
 public:
+	
 	Transform transform;
 	Collider collider;
 	Sprite sprite;
 	Rigidbody rgdb;
+	
+	
 	int health = 15;
 	void move(Player &player, Transform t);
 	void speedClamp();
+	
 };
 class Death
 {
@@ -36,8 +45,6 @@ public:
 	Sprite sprite;
 	Rigidbody rgdb;
 	void move(Player &player, Transform t);
-
-
 };
 class NPC
 {
