@@ -68,5 +68,10 @@ public:
 	int health = 15;
 	void move(Player &player, Transform t);
 };
+class Shop
+{
+public:
+	
+};
 bool collision(Player &player, Karma &karma, Death &death, NPC &npc);
 void leveling(Karma &karma, Player &player,NPC &npc);

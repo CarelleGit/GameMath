@@ -17,10 +17,17 @@ public:
 		{
 			rb.force += vec2{ 1000,0 };
 		}
-		if (sfw::getKey(MOUSE_BUTTON_LEFT))
+		if (sfw::getKey(MOUSE_BUTTON_LEFT) && sfw::getKey('A'))
 		{
 			
 		}
-		
+		if (sfw::getKey(MOUSE_BUTTON_LEFT) && sfw::getKey('B'))
+		{
+
+		}
+		if (!sfw::getKey(MOUSE_BUTTON_LEFT) && !sfw::getKey('B') && !sfw::getKey('A'))
+		{
+
+		}
 	}
 };
