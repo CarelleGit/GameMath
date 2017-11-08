@@ -11,15 +11,16 @@ public:
 		if (sfw::getKey('A'))
 		{
 			rb.force -= vec2{ 1000,0 };
+			
 		}
 		if (sfw::getKey('D'))
 		{
 			rb.force += vec2{ 1000,0 };
 		}
-		/*if (sfw::getKey(' '))
+		if (sfw::getKey(MOUSE_BUTTON_LEFT))
 		{
 			
-		}*/
+		}
 		
 	}
 };
