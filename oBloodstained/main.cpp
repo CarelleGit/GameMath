@@ -3,7 +3,7 @@
 
 int main()
 {
-	sfw::initContext(800, 600, "Bloodstained");
+	sfw::initContext(1000, 800, "Bloodstained");
 	sfw::setBackgroundColor(BLACK);
 
 	Player Kel;
@@ -24,12 +24,21 @@ int main()
 	kar.transform.position = vec2{ 0,300 };
 	kar.rgdb.drag = 5.5f;
 
+	Death death;
+
+	NPC victom;
+	victom.sprite = sfw::loadTextureMap("res/Adorable-Cat-PNG.png");
+	victom.transform.dimentions = vec2{ 50,50 };
+	victom.collider.box.extents = { vec2{ .5f,.5f } };
+	victom.transform.position = vec2{ 0,300 };
+	victom.rgdb.drag = 5.5f; 
+
 	while (sfw::stepContext())
 	{
 		float dt = sfw::getDeltaTime();
 		if (Kel.health >= 0 && kar.health >= 0)
 		{
-			collision(Kel, kar);
+			collision(Kel, kar, death, victom);
 		}
 		if (Kel.health >= 0)
 		{
@@ -43,7 +52,7 @@ int main()
 
 			Kel.right.drawBox(Kel.transform);
 			Kel.left.drawBox(Kel.transform);
-			leveling(kar, Kel);
+			leveling(kar, Kel,victom);
 		}
 
 		if (kar.health >= 0)
@@ -54,7 +63,14 @@ int main()
    			kar.sprite.draw(kar.transform);
 			
 		}
+		kar.respawn();
+		if (victom.health >= 0)
+		{
+			victom.collider.drawBox(victom.transform);
+			victom.move(Kel, victom.transform);
+			victom.rgdb.intergrate(victom.transform, dt);
+			victom.sprite.draw(victom.transform);
+		}
 	}
 	sfw::termContext();
-
 }

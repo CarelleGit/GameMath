@@ -42,6 +42,8 @@ public:
 	int health = 15;
 	void move(Player &player, Transform t);
 	void speedClamp();
+	void respawn();
+
 };
 class Death
 {
@@ -59,11 +61,12 @@ class NPC
 {
 public:
 	Transform transform;
-
-
-
-
+	bool directrion = true; //true to right false to the left
+	Sprite sprite;
+	Rigidbody rgdb;
+	Collider collider;
+	int health = 15;
+	void move(Player &player, Transform t);
 };
-bool collision(Player &player, Karma &karma);
-bool collision(Player &player, Death &death);
-void leveling(Karma &karma, Player &player);
+bool collision(Player &player, Karma &karma, Death &death, NPC &npc);
+void leveling(Karma &karma, Player &player,NPC &npc);
