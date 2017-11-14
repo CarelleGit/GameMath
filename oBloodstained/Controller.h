@@ -1,13 +1,14 @@
 #pragma once
-#include <random>
-#include <ctime>
 class Controller
 {
 public:
 
 	void poll(Rigidbody &rb, const Transform &t)
 	{
-		
+		if (t.position.y >= 75)
+		{
+			rb.force = vec2{ 0,-20 };
+		}
 		if (sfw::getKey('A'))
 		{
 			rb.force -= vec2{ 1000,0 };
@@ -17,17 +18,6 @@ public:
 		{
 			rb.force += vec2{ 1000,0 };
 		}
-		if (sfw::getKey(MOUSE_BUTTON_LEFT) && sfw::getKey('A'))
-		{
-			
-		}
-		if (sfw::getKey(MOUSE_BUTTON_LEFT) && sfw::getKey('B'))
-		{
-
-		}
-		if (!sfw::getKey(MOUSE_BUTTON_LEFT) && !sfw::getKey('B') && !sfw::getKey('A'))
-		{
-
-		}
+		
 	}
 };

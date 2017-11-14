@@ -1,5 +1,8 @@
 #include "Collision.h"
 #include <cmath>
+
+#include <iostream>
+
 Collision intersect_1D(float aMin, float aMax, float bMin, float bMax)
 {
 	Collision ret;
@@ -52,17 +55,14 @@ void dynamic_resolution(vec2 & aPos, vec2 & aVel, float aMass, vec2 & bPos, vec2
 {
 	vec2 rVel = aVel - bVel;
 
-	vec2 normal = hit.axis * hit.handedness;
-
-	
+	vec2 normal = hit.axis * hit.handedness;	
 
 	float j = -(1 + elasticity) * dot(rVel, normal) / dot(normal, normal*(1 / aMass + 1 / bMass));
+	//
+	aVel.x += ((j / aMass) * normal).x;
+	bVel.x -= ((j / bMass) * normal).x;
 
-	
-	aVel += (j / aMass) * normal;
-	bVel -= (j / bMass) * normal;
-
-	aPos += normal * hit.penetrationDepth * aMass / (aMass + bMass);
-	bPos -= normal * hit.penetrationDepth * bMass / (aMass + bMass);
+	aPos.x += (normal * hit.penetrationDepth * aMass / (aMass + bMass)).x;
+	bPos.x -= (normal * hit.penetrationDepth * bMass / (aMass + bMass)).x;
 
 }
