@@ -3,6 +3,7 @@
 #include "Transform.h"
 #include "Controller.h"
 #include "Collider.h"
+#include <cstring>
 #include "Sprites.h"
 
 
@@ -17,11 +18,14 @@ public:
 class Player : public Controller 
 {
 public:
+	
+
 	int weaponType = 0;
 	int level = 0;
 	int damage;
 	int xp = 0;
 
+	int text = sfw::loadTextureMap("res/fontmap.png",16,16);
 	Collider right;
 	Collider left;
 
@@ -30,9 +34,10 @@ public:
 	Controller control;
 	Collider collider;
 	Sprite sprite;
-	int health = 20;
+	char health = 20;
 	void update(ground &Ground);
 	int collisionResolution();
+	void respawn();
 
 };
 class Karma
@@ -49,7 +54,6 @@ public:
 	float time = 10;
 	int health = 15;
 	void move(Player &player, Transform t);
-	void speedClamp();
 	void respawn();
 
 };
@@ -69,12 +73,14 @@ class NPC
 {
 public:
 	Transform transform;
+	float time = 10;
 	bool directrion = true; //true to right false to the left
 	Sprite sprite;
 	Rigidbody rgdb;
 	Collider collider;
 	int health = 15;
 	void move(Player &player, Transform t);
+	void respawn();
 };
 class Shop
 {
@@ -84,5 +90,5 @@ public:
 	Collider collider;
 };
 
-bool collision(Player &player, Karma &karma, Death &death, NPC &npc, Shop &shop, ground &Ground);
+bool collision(Player &player, Karma &karma, Death &death, NPC &npc, ground &Ground);
 void leveling(Karma &karma, Player &player,NPC &npc);

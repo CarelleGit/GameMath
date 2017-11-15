@@ -31,4 +31,4 @@ public:
 	bool enable;
 	void draw();
 };
-void update(MainMenu &menu, Controls &control, GameOver &over, Player &player);
+void update(MainMenu &menu, Controls &control, GameOver &over, Player &player, Karma &karma, NPC &npc, Death &death);

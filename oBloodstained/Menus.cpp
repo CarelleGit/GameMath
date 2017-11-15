@@ -1,15 +1,21 @@
 #include "Menus.h"
-
-void update(MainMenu & menu, Controls & control, GameOver & over, Player &player)
+#include <ctime>
+void update(MainMenu & menu, Controls & control, GameOver & over, Player &player, Karma &karma, NPC &npc, Death &death)
 {
+	srand(time(NULL));
 	if (menu.enable == true)
 	{
 		
 		if (sfw::getKey('S'))
 		{
 			menu.enable = false;
-			player.health = 20;
-			player.transform.position = vec2{ 450,50 };
+			if (menu.enable == false)
+			{
+				player.health = 20;
+				player.transform.position = vec2{ 450,50 };
+				karma.transform.position = vec2{ 600,60 };
+				npc.transform.position.x = rand() % 1 + 1000;
+			}
 		}
 		if (sfw::getKey('C'))
 		{

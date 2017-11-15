@@ -1,6 +1,7 @@
 #include "sfwdraw.h"
 #include "Entities.h"
 #include "Menus.h"
+#include "ctime"
 #include <iostream>
 
 int main()
@@ -8,45 +9,52 @@ int main()
 	sfw::initContext(1000, 800, "Bloodstained");
 	sfw::setBackgroundColor(BLACK);
 
-	bool quit = false;
+	
 
-	MainMenu menu;
+	bool quit = false;
+	
+	int back;
+	back = sfw::loadTextureMap("res/Background.png");
+	int info;
+	info = sfw::loadTextureMap("res/Level.png");
+
+	/*MainMenu menu;
 	menu.enable = true;
 	Controls control;
 	control.enable = false;
 	GameOver over;
-	over.enable = false;
+	over.enable = false;*/
 
 	Player Kel;
-	Kel.sprite = sfw::loadTextureMap("res/Adorable-Cat-PNG.png");
-	Kel.transform.dimentions = vec2{ 100,100 };
+	Kel.sprite = sfw::loadTextureMap("res/Player.png");
+	Kel.transform.dimentions = vec2{ 50,100 };
 	Kel.collider.box.extents = vec2{ 0.5,.5 };
-	//Kel.transform.position = vec2{ 450,800 };
+	Kel.transform.position = vec2{ 450,800 };
 	Kel.rgdb.drag = 5.5f;
 
 		
 
 	Karma kar;
-	kar.sprite = sfw::loadTextureMap("res/Adorable-Cat-PNG.png");
-	kar.transform.dimentions = vec2{ 80,50 };
+	kar.sprite = sfw::loadTextureMap("res/Karma.png");
+	kar.transform.dimentions = vec2{ 50,100 };
 	kar.collider.box.extents = { vec2 {.5f,.5f} };
-	kar.transform.position = vec2{ 600,40 };
+	kar.transform.position = vec2{ 600,60 };
 	kar.rgdb.drag = 5.5f;
 
 	Death death;
 
-	NPC victom;
-	victom.sprite = sfw::loadTextureMap("res/Adorable-Cat-PNG.png");
-	victom.transform.dimentions = vec2{ 80,50 };
-	victom.collider.box.extents = { vec2{ .5f,.5f } };
-	victom.transform.position = vec2{ 50,100 };
-	victom.rgdb.drag = 5.5f; 
+	NPC victom[4];
+	for (int i = 0; i < 4; i++)
+	{
+		victom[i].sprite = sfw::loadTextureMap("res/NPC.png");
+		victom[i].transform.dimentions = vec2{ 50,100 };
+		victom[i].collider.box.extents = { vec2{ .5f,.5f } };
+		victom[i].transform.position.x = rand() % 1000 + 1;
+		victom[i].transform.position.y = 60;
+		victom[i].rgdb.drag = 5.5f;
+	}
 
-	Shop shop;
-	shop.transform.position = vec2{ 0,300 };
-	shop.transform.dimentions = vec2{ 100,100 };
-	shop.collider.box.extents = vec2{ .5f,.5f };
-	shop.sprite = sfw::loadTextureMap("res/Square.png");
+
 
 	ground Ground;
 	Ground.sprite = sfw::loadTextureMap("res/green-line.png");
@@ -56,15 +64,22 @@ int main()
 
 	while (sfw::stepContext())
 	{
+		
+		sfw::drawTexture(back,500,400,1000,800);
+		sfw::drawTexture(info, 900, 750, 294, 128);
+		sfw::drawString(Kel.text, "Health:", 770, 740, 20, 20);
 		// std::cout << sfw::getDeltaTime() << std::endl;
-
 		sfw::setCursorVisible(true);
 		sfw::getCursorVisible;
-		update(menu, control, over, Kel);
+		//update(menu, control, over, Kel,kar, victom[4],death);
 		float dt = sfw::getDeltaTime();
 		if (Kel.health >= 0)
 		{
-			collision(Kel, kar, death, victom, shop, Ground);
+			for (int i = 0; i < 4; i++)
+			{
+				collision(Kel, kar, death, victom[i], Ground);
+			}
+			
 		}
 		if (Kel.health >= 0)
 		{
@@ -74,7 +89,6 @@ int main()
 
 			Kel.sprite.draw(Kel.transform);
 
-			Kel.collider.drawBox(Kel.transform);
 			Kel.update(Ground);
 			if (sfw::getMouseButton(MOUSE_BUTTON_RIGHT))
 			{
@@ -84,29 +98,29 @@ int main()
 			{
 				Kel.left.drawBox(Kel.transform);
 			}
-			leveling(kar, Kel,victom);
+			leveling(kar, Kel, victom[0]);
 		}
 
 		if (kar.health >= 0)
 		{
-			kar.collider.drawBox(kar.transform);
 			kar.move(Kel, kar.transform);
 			kar.rgdb.intergrate(kar.transform, dt);
    			kar.sprite.draw(kar.transform);
 			
 		}
 		kar.respawn();
-		if (victom.health >= 0)
+		for (int i = 0; i < 4; i++)
 		{
-			victom.collider.drawBox(victom.transform);
-			victom.move(Kel, victom.transform);
-			victom.rgdb.intergrate(victom.transform, dt);
-			victom.sprite.draw(victom.transform);
-		}
-		shop.collider.drawBox(shop.transform);
-		shop.sprite.draw(shop.transform);
+			if (victom[i].health >= 0)
+			{
 
-		Ground.collider.drawBox(Ground.transform);
+				victom[i].move(Kel, victom[i].transform);
+				victom[i].rgdb.intergrate(victom[i].transform, dt);
+				victom[i].sprite.draw(victom[i].transform);
+			}
+			victom[i].respawn();
+		}
+
 		Ground.sprite.draw(Ground.transform);
 
 		if (sfw::getKey(KEY_ESCAPE))
@@ -117,7 +131,7 @@ int main()
 		{
 			return -1;
 		}
-		if (menu.enable == true)
+	/*	if (menu.enable == true)
 		{
 			menu.draw();
 		}
@@ -128,7 +142,7 @@ int main()
 		if (over.enable == true)
 		{
 			over.draw();
-		}
+		}*/
 	}
 	sfw::termContext();
 }
