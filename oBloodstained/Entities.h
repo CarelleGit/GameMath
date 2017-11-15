@@ -6,6 +6,14 @@
 #include "Sprites.h"
 
 
+class ground
+{
+public:
+	bool isGrounded = true;
+	Transform transform;
+	Sprite sprite;
+	Collider collider;
+};
 class Player : public Controller 
 {
 public:
@@ -14,9 +22,7 @@ public:
 	int damage;
 	int xp = 0;
 
-	bool eRight = true;
 	Collider right;
-	bool eLeft = false;
 	Collider left;
 
 	Transform transform;
@@ -25,8 +31,7 @@ public:
 	Collider collider;
 	Sprite sprite;
 	int health = 20;
-	void speedClamp();
-	void update();
+	void update(ground &Ground);
 	int collisionResolution();
 
 };
@@ -78,13 +83,6 @@ public:
 	Sprite sprite;
 	Collider collider;
 };
-class ground
-{
-public:
-	bool isGrounded = true;
-	Transform transform;
-	Sprite sprite;
-	Collider collider;
-};
+
 bool collision(Player &player, Karma &karma, Death &death, NPC &npc, Shop &shop, ground &Ground);
 void leveling(Karma &karma, Player &player,NPC &npc);

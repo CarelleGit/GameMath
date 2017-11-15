@@ -48,7 +48,12 @@ void static_resolution(vec2 & pos, vec2 & vel, const Collision & hit, float elas
 {
 	pos += hit.axis * hit.handedness * hit.penetrationDepth;
 
-	vel = reflect(vel, hit.axis*hit.handedness) * elasticity;
+	if (hit.axis.y == 1)
+	{
+		vel.y = reflect(vel, hit.axis*hit.handedness).y * elasticity;
+	}
+	else//
+		vel = reflect(vel, hit.axis*hit.handedness) * elasticity;
 }
 
 void dynamic_resolution(vec2 & aPos, vec2 & aVel, float aMass, vec2 & bPos, vec2 bVel,float bMass, const Collision & hit, float elasticity)

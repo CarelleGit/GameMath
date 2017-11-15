@@ -4,16 +4,17 @@ bool collision(Player &player, Karma &karma, Death &death, NPC &npc, Shop &shop,
 {
 	auto hit = Collides(player.transform,player.collider,
 		karma.transform, karma.collider);
-
-	if (hit.penetrationDepth > 0)
+	if (karma.health >= 0)
 	{
-		player.health -= 1;
-		return true;
+		if (hit.penetrationDepth > 0)
+		{
+			player.health -= 1;
+			return true;
+		}
 	}
 
 	auto dHit = Collides(player.transform, player.collider,
 		death.transform, death.collider);
-
 	if (dHit.penetrationDepth > 0)
 	{
 		player.health -= 1;
@@ -28,9 +29,9 @@ bool collision(Player &player, Karma &karma, Death &death, NPC &npc, Shop &shop,
 
 		if (lnHit.penetrationDepth > 0)
 		{
-			std::cout << npc.health << "\n";
+			//std::cout << npc.health << "\n";
 			npc.health -= 1;
-			std::cout << npc.health << "\n";
+			//std::cout << npc.health << "\n";
 			dynamic_resolution(player.transform.position, player.rgdb.velocity, player.rgdb.mass, npc.transform.position, npc.rgdb.velocity, npc.rgdb.mass, lnHit, .25f);
 			return true;
 		}
@@ -38,7 +39,7 @@ bool collision(Player &player, Karma &karma, Death &death, NPC &npc, Shop &shop,
 		auto rattack = Collides(player.transform, player.right, karma.transform, karma.collider);
 		if (rattack.penetrationDepth > 0)
 		{
-			std::cout << karma.health << "\n";
+			//std::cout << karma.health << "\n";
 			karma.health -= player.collisionResolution();
 			dynamic_resolution(player.transform.position, player.rgdb.velocity, player.rgdb.mass, karma.transform.position, karma.rgdb.velocity, karma.rgdb.mass, rattack, .25f);
 			return true;
@@ -52,7 +53,7 @@ bool collision(Player &player, Karma &karma, Death &death, NPC &npc, Shop &shop,
 
 			if (nHit.penetrationDepth > 0)
 			{
-				std::cout << npc.health << "\n";
+			//	std::cout << npc.health << "\n";
 				npc.health -= 1;
 				dynamic_resolution(player.transform.position, player.rgdb.velocity, player.rgdb.mass, npc.transform.position, npc.rgdb.velocity, npc.rgdb.mass, nHit, .25f);
 
@@ -63,7 +64,7 @@ bool collision(Player &player, Karma &karma, Death &death, NPC &npc, Shop &shop,
 			auto lattack = Collides(player.transform, player.left, karma.transform, karma.collider);
 			if (lattack.penetrationDepth > 0)
 			{
-				std::cout << karma.health << "\n";
+			//	std::cout << karma.health << "\n";
 				karma.health -= player.collisionResolution();
 				dynamic_resolution(player.transform.position, player.rgdb.velocity, player.rgdb.mass, karma.transform.position, karma.rgdb.velocity, karma.rgdb.mass, lattack, .25f);
 				return true;
@@ -80,12 +81,25 @@ bool collision(Player &player, Karma &karma, Death &death, NPC &npc, Shop &shop,
 		}
 
 		auto grounded = Collides(player.transform, player.collider, Ground.transform, Ground.collider);
-		if (grounded.penetrationDepth > 0)
+		if (grounded.penetrationDepth >= 0)
 		{
-			static_resolution(player.transform.position, player.rgdb.velocity, grounded, .25f);
 			Ground.isGrounded = true;
-			return true;
+			player.control.grounded = Ground.isGrounded;
+
+			//std::cout << "Test" << std::endl;
+
+			if (grounded.penetrationDepth > 0)
+			{
+				static_resolution(player.transform.position, player.rgdb.velocity, grounded, 0);
+				std::cout << player.transform.position.y << " " << player.transform.position.x <<"\n";
+				return true;
+			}
 		}
+		else
+		{
+			Ground.isGrounded = player.control.grounded = false;
+		}
+
 	return false;
 }
 
@@ -125,12 +139,9 @@ void leveling(Karma &karma, Player &player, NPC &npc)
 		}
 }
 
-inline void Player::speedClamp()
-{
-	clamp(vec2{ 0,0 }, rgdb.force, vec2{ 5,5 });
-}
 
-void Player::update()
+
+void Player::update(ground &Ground)
 {
 	if (!sfw::getKey('D') && sfw::getMouseButton(MOUSE_BUTTON_LEFT))
 	{
@@ -142,6 +153,14 @@ void Player::update()
 		right.box.position = vec2{ .5f,0 };
 		right.box.extents = vec2{ .5f,.5f };
 	}
+	if (Ground.isGrounded == true)
+	{
+		if (sfw::getKey(' '))
+		{
+			rgdb.impulse.y = 200;
+			Ground.isGrounded = false;
+		}
+	}
 }
 
 enum MOVE_BEHAVIOUR { Wander, FollowPlayer, OffScreenLeft, OffScreenRight };
@@ -149,7 +168,7 @@ enum MOVE_BEHAVIOUR { Wander, FollowPlayer, OffScreenLeft, OffScreenRight };
 void Karma::move(Player & player, Transform t)
 {
 	bool left = true;
-	float speedToUse = 50;// rand() % 800;
+	float speedToUse = 100;// rand() % 800;
 	MOVE_BEHAVIOUR mb = Wander;
 
 	if (dist(player.transform.position, transform.position) < 500)
@@ -183,10 +202,10 @@ void Karma::move(Player & player, Transform t)
 
 	case FollowPlayer:
 		if (player.transform.position.x  > transform.position.x)
-			rgdb.force = vec2{ speedToUse,0 };
+			rgdb.force += vec2{ speedToUse,0 };
 
 		else if (player.transform.position.x < transform.position.x)
-			rgdb.force = vec2{ speedToUse,0 };
+			rgdb.force -= vec2{ speedToUse,0 };
 		break;
 
 	case Wander:
@@ -200,12 +219,12 @@ void Karma::move(Player & player, Transform t)
 		}
 			if (directrion)
 			{
-				rgdb.force = vec2{ speedToUse,0 };
+				rgdb.force += vec2{ speedToUse,0 };
 			}
 			if (!directrion)
 			{
 				//transform.position.x += 5;
-				rgdb.force = vec2{ speedToUse,0 };
+				rgdb.force -= vec2{ speedToUse,0 };
 			}
 			
 		break;
@@ -215,10 +234,6 @@ void Karma::move(Player & player, Transform t)
 	}                                                                           
 }
 
-inline void Karma::speedClamp()
-{
-	clamp(vec2{ 0,0 }, rgdb.force, vec2{ 5,5 });
-}
 
 void Karma::respawn()
 {
@@ -230,7 +245,7 @@ void Karma::respawn()
 		{
 			health = 15;
 			time = 10;
-			transform.position = vec2{ 0,300 };
+			transform.position = vec2{ 600,40 };
 		}
 	}	
 }
@@ -321,12 +336,12 @@ void Death::move(Player & player, Transform t)
 		}
 		if (directrion)
 		{
-			rgdb.force = vec2{ speedToUse,0 };
+			rgdb.force -= vec2{ speedToUse,0 };
 		}
 		if (!directrion)
 		{
 			//transform.position.x += 5;
-			rgdb.force = vec2{ speedToUse,0 };
+			rgdb.force += vec2{ speedToUse,0 };
 		}
 
 		break;
@@ -338,7 +353,7 @@ void Death::move(Player & player, Transform t)
 
 void NPC::move(Player & player, Transform t)
 {
-	float speedToUse = 50;// rand() % 800;
+	float speedToUse = 100;// rand() % 800;
 	MOVE_BEHAVIOUR mb = Wander;
 
 	if (dist(player.transform.position, transform.position) < 400)
@@ -355,10 +370,10 @@ void NPC::move(Player & player, Transform t)
 
 	case FollowPlayer:
 		if (player.transform.position.x  > transform.position.x)
-			rgdb.force = vec2{ speedToUse,0 };
+			rgdb.force -= vec2{ speedToUse,0 };
 
 		else if (player.transform.position.x < transform.position.x)
-			rgdb.force = vec2{ speedToUse,0 };
+			rgdb.force += vec2{ speedToUse,0 };
 		break;
 
 	case Wander:

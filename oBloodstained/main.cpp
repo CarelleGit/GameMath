@@ -1,5 +1,6 @@
 #include "sfwdraw.h"
 #include "Entities.h"
+#include "Menus.h"
 #include <iostream>
 
 int main()
@@ -9,11 +10,18 @@ int main()
 
 	bool quit = false;
 
+	MainMenu menu;
+	menu.enable = true;
+	Controls control;
+	control.enable = false;
+	GameOver over;
+	over.enable = false;
+
 	Player Kel;
 	Kel.sprite = sfw::loadTextureMap("res/Adorable-Cat-PNG.png");
 	Kel.transform.dimentions = vec2{ 100,100 };
 	Kel.collider.box.extents = vec2{ 0.5,.5 };
-	Kel.transform.position = vec2{ 400,300 };
+	//Kel.transform.position = vec2{ 450,800 };
 	Kel.rgdb.drag = 5.5f;
 
 		
@@ -22,7 +30,7 @@ int main()
 	kar.sprite = sfw::loadTextureMap("res/Adorable-Cat-PNG.png");
 	kar.transform.dimentions = vec2{ 80,50 };
 	kar.collider.box.extents = { vec2 {.5f,.5f} };
-	kar.transform.position = vec2{ 0,300 };
+	kar.transform.position = vec2{ 600,40 };
 	kar.rgdb.drag = 5.5f;
 
 	Death death;
@@ -31,7 +39,7 @@ int main()
 	victom.sprite = sfw::loadTextureMap("res/Adorable-Cat-PNG.png");
 	victom.transform.dimentions = vec2{ 80,50 };
 	victom.collider.box.extents = { vec2{ .5f,.5f } };
-	victom.transform.position = vec2{ 0,300 };
+	victom.transform.position = vec2{ 50,100 };
 	victom.rgdb.drag = 5.5f; 
 
 	Shop shop;
@@ -48,11 +56,11 @@ int main()
 
 	while (sfw::stepContext())
 	{
-		std::cout << sfw::getDeltaTime() << std::endl;
+		// std::cout << sfw::getDeltaTime() << std::endl;
 
 		sfw::setCursorVisible(true);
 		sfw::getCursorVisible;
-		
+		update(menu, control, over, Kel);
 		float dt = sfw::getDeltaTime();
 		if (Kel.health >= 0)
 		{
@@ -67,7 +75,7 @@ int main()
 			Kel.sprite.draw(Kel.transform);
 
 			Kel.collider.drawBox(Kel.transform);
-			Kel.update();
+			Kel.update(Ground);
 			if (sfw::getMouseButton(MOUSE_BUTTON_RIGHT))
 			{
 				Kel.right.drawBox(Kel.transform);
@@ -108,6 +116,18 @@ int main()
 		if (quit == true)
 		{
 			return -1;
+		}
+		if (menu.enable == true)
+		{
+			menu.draw();
+		}
+		if (control.enable == true)
+		{
+			control.draw();
+		}
+		if (over.enable == true)
+		{
+			over.draw();
 		}
 	}
 	sfw::termContext();
